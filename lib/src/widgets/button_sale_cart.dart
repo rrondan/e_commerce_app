@@ -1,5 +1,7 @@
+import 'package:e_commerce_app/src/providers_model/sale_cart_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 class ButtonSaleCart extends StatelessWidget {
   final Color colorIcon;
@@ -15,25 +17,31 @@ class ButtonSaleCart extends StatelessWidget {
             "assets/icons/cart.svg",
             color: colorIcon,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, "shopping_cart");
+          },
         ),
         Positioned(
-          top: 8,
+          top: 9,
           right: 8,
-          child: Container(
-            width: 16,
-            height: 16,
-            decoration:
-                BoxDecoration(shape: BoxShape.circle, color: Colors.red),
-            child: Center(
-              child: Text(
-                "1",
-                style: TextStyle(color: Colors.white, fontSize: 10),
-              ),
-            ),
-          ),
+          child: _redCircle(),
         )
       ],
+    );
+  }
+
+  Widget _redCircle(){
+    return Consumer<SaleCartModel>(
+      builder: (BuildContext context, SaleCartModel saleCartModel, Widget child){
+        if(saleCartModel.totalProducts > 0){
+          return child;
+        }
+        return SizedBox();
+      },
+      child: Container(
+        width: 12,
+        height: 12,
+        decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.red)),
     );
   }
 }

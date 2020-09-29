@@ -5,6 +5,9 @@ import 'package:e_commerce_app/src/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'src/pages/shopping_cart/shopping_cart_page.dart';
+import 'src/providers_model/sale_cart_model.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -13,9 +16,11 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ProductsModel()),
+        ChangeNotifierProvider(create: (_) => SaleCartModel()),
       ],
       child: MaterialApp(
         title: 'E-commerce App',
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           textTheme: Theme.of(context).textTheme.apply(bodyColor: textColor),
           visualDensity: VisualDensity.adaptivePlatformDensity
@@ -24,6 +29,7 @@ class MyApp extends StatelessWidget {
         routes: {
           "/": (BuildContext context) => HomePage(),
           "product_detail": (_) => DetailProductPage(),
+          "shopping_cart": (_) => ShoppingCartPage(),
         },
       ),
     );
