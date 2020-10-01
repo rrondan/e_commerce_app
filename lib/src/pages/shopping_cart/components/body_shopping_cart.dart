@@ -97,7 +97,7 @@ class _TotalAndCheckout extends StatelessWidget {
         children: [
           _totalPrice(),
           SizedBox(height: 16),
-          _checkoutButton()
+          _checkoutButton(context)
         ],
       ),
     );
@@ -118,7 +118,7 @@ class _TotalAndCheckout extends StatelessWidget {
     );
   }
 
-  Widget _checkoutButton(){
+  Widget _checkoutButton(BuildContext context){
     return SizedBox(
       height: 50,
       child: FlatButton(
@@ -133,7 +133,9 @@ class _TotalAndCheckout extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
-        onPressed: (){},
+        onPressed: (){
+          Navigator.pushNamed(context, "checkout");
+        },
       ),
     );
   }
